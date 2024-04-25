@@ -1,13 +1,13 @@
 ﻿# Sử dụng FastAPI và PostgreSQL tạo API quản lý dữ liệu người dùng 
 
-##Yêu cầu :
+## Yêu cầu :
 * Cài đặt [Python](https://www.python.org/downloads/)
 * Cài đặt [PostgreSQL](https://www.postgresql.org/download/)
 * Tùy nhu cầu dùng [Postman](https://www.postman.com/downloads/)
 
 
 ## Cài đặt :
-###Cơ sở dữ liệu:
+### Cơ sở dữ liệu:
 * Tạo cơ sở dữ liệu mới tên là `Users`
 * Sửa đổi tên và mật khẩu trong database.py `postgresql://postgres:123456@localhost:5432/Users`
 ### Mở lệnh Terminal VSCode:
