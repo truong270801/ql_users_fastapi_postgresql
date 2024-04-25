@@ -25,3 +25,7 @@ def create_user(db:Session, user:userSchema):
 #Lấy tất cả dữ liệu user
 def get_user(db: Session,skipt: int = 0, limit: int = 100):
     return db.query(User).offset(skipt).limit(limit).all()
+
+#Lấy dữ liệu user từ id
+def get_user_by_id(db:Session,id: int):
+    return db.query(User).filter(User.id == id).first()
