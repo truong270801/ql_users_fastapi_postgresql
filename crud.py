@@ -29,3 +29,36 @@ def get_user(db: Session,skipt: int = 0, limit: int = 100):
 #Lấy dữ liệu user từ id
 def get_user_by_id(db:Session,id: int):
     return db.query(User).filter(User.id == id).first()
+
+#Cập nhật user     
+def update_user(db: Session,
+                id: int,
+                firstName: str,
+                lastName: str,
+                maidenName: str,
+                age: int,
+                gender: str,
+                email: str,
+                phone: str,
+                birthDate: date,
+                address: str,
+                city: str,
+                university: str
+                ):
+    u_user = get_user_by_id(db=db, id=id)
+    if u_user:
+        u_user.firstName = firstName
+        u_user.lastName = lastName
+        u_user.maidenName = maidenName
+        u_user.age = age
+        u_user.gender = gender
+        u_user.email = email
+        u_user.phone = phone
+        u_user.birthDate = birthDate
+        u_user.address = address
+        u_user.city = city
+        u_user.university = university
+        db.commit()
+        db.refresh(u_user)
+    return u_user
+
