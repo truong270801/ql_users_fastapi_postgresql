@@ -62,3 +62,9 @@ def update_user(db: Session,
         db.refresh(u_user)
     return u_user
 
+
+#Xóa user
+def remove_user(db:Session, id=int):
+    r_user = get_user_by_id(db=db,id=id)
+    db.delete(r_user)
+    db.commit()

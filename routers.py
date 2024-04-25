@@ -37,3 +37,8 @@ async def update_user(request:RequestUser,db:Session = Depends(get_db)):
                             city = request.parameter.city,
                             university = request.parameter.university)
     return Response( user = u_user)
+
+@router.delete('/{id}')
+async def delete(id:int,db:Session = Depends(get_db)):
+    crud.remove_user(db,id=id)
+    return dict(exclude_none=True)
