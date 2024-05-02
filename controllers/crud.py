@@ -1,5 +1,3 @@
-# controllers/crud.py
-
 from sqlalchemy.orm import Session
 from database.schemas import RequestUser, Response
 from repositories.user_repository import UserRepository

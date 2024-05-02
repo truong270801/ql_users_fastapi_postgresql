@@ -1,5 +1,3 @@
-# controllers/router.py
-
 from fastapi import APIRouter, Depends, HTTPException, Path
 from sqlalchemy.orm import Session
 from database.database import get_db
