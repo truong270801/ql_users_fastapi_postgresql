@@ -1,13 +1,14 @@
-from fastapi import FastAPI
-from models import model
-from database.database import engine
-from controllers import routers
+# main.py
 
-model.Base.metadata.create_all(bind = engine)
+from fastapi import FastAPI
+from database.database import engine
+from controllers.routers import router  # Thay đổi import để import router mới
+
 app = FastAPI()
 
-app.include_router(routers.router,prefix="/users",tags=["Users"])
+# Tạo bảng cơ sở dữ liệu
+from models.model import Base
+Base.metadata.create_all(bind=engine)
 
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
+# Include router từ controllers/router.py
+app.include_router(router, prefix="/users", tags=["Users"])  # Thay đổi import để sử dụng router mới

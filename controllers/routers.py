@@ -1,44 +1,34 @@
-from fastapi import APIRouter,HTTPException,Path,Depends
-from database.database import get_db
+# controllers/router.py
+
+from fastapi import APIRouter, Depends, HTTPException, Path
 from sqlalchemy.orm import Session
-from database.schemas import  RequestUser,Response
+from database.database import get_db
+from database.schemas import RequestUser, Response
 from controllers import crud
 
 router = APIRouter()
 
 @router.post('/create')
-async def create(request: RequestUser ,db: Session = Depends(get_db)):
-    crud.create_user(db,user = request.parameter)
-    return dict(exclude_none = True)
+async def create_user(request: RequestUser, db: Session = Depends(get_db)):
+    created_user = crud.create_user(db, request)
+    return Response(user=created_user).dict(exclude_none=True)
 
 @router.get('/')
-async def get(db: Session = Depends(get_db)):
-    g_user = crud.get_user(db,0,100)
-    return Response( user = g_user).dict(exclude_none=True)
+async def get_users(db: Session = Depends(get_db)):
+    users = crud.get_users(db)
+    return Response(user=users).dict(exclude_none=True)
 
 @router.get('/{id}')
-async def get_by_id(id:int,db:Session =Depends(get_db) ):
-    g_idUser = crud.get_user_by_id(db,id)
-    return Response(user=g_idUser).dict(exclude_none=True)
+async def get_user_by_id(id: int, db: Session = Depends(get_db)):
+    user = crud.get_user_by_id(db, id)
+    return Response(user=user).dict(exclude_none=True)
 
-@router.post('/{id}')
-async def update_user(request:RequestUser,id = int, db:Session = Depends(get_db)):
-    u_user = crud.update_user(db, 
-                            id=id,
-                            firstName = request.parameter.firstName,
-                            lastName = request.parameter.lastName,
-                            maidenName = request.parameter.maidenName,
-                            age = request.parameter.age,
-                            gender = request.parameter.gender,
-                            email = request.parameter.email,
-                            phone = request.parameter.phone,
-                            birthDate = request.parameter.birthDate,
-                            address = request.parameter.address,
-                            city = request.parameter.city,
-                            university = request.parameter.university)
-    return Response( user = u_user)
+@router.put('/{id}')
+async def update_user(request: RequestUser, id: int, db: Session = Depends(get_db)):
+    updated_user = crud.update_user(db, id, request)
+    return Response(user=updated_user).dict(exclude_none=True)
 
 @router.delete('/{id}')
-async def delete(id:int,db:Session = Depends(get_db)):
-    crud.remove_user(db,id=id)
-    return dict(exclude_none=True)
+async def delete_user(id: int, db: Session = Depends(get_db)):
+    deleted = crud.delete_user(db, id)
+    return {"success": deleted}
