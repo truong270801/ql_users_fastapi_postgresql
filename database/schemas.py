@@ -6,7 +6,6 @@ from datetime import date
 
 T = TypeVar('T')
 class userSchema(BaseModel):
-    id:Optional[int] = None
     firstName:Optional[str] = None
     lastName:Optional[str] = None
     maidenName:Optional[str] = None

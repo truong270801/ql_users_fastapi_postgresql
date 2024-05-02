@@ -21,10 +21,10 @@ async def get_by_id(id:int,db:Session =Depends(get_db) ):
     g_idUser = crud.get_user_by_id(db,id)
     return Response(user=g_idUser).dict(exclude_none=True)
 
-@router.post('/update')
-async def update_user(request:RequestUser,db:Session = Depends(get_db)):
+@router.post('/{id}')
+async def update_user(request:RequestUser,id = int, db:Session = Depends(get_db)):
     u_user = crud.update_user(db, 
-                            id=request.parameter.id,
+                            id=id,
                             firstName = request.parameter.firstName,
                             lastName = request.parameter.lastName,
                             maidenName = request.parameter.maidenName,
