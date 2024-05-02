@@ -1,1 +1,7 @@
 __pycache__/
+controllers/__pycache__/
+database/__pycache__/
+models/__pycache__/
+repositories/__pycache__/
+
+
