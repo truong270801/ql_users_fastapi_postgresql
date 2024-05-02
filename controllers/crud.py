@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from model import User
-from schemas import userSchema
+from models.model import User
+from database.schemas import userSchema
 from datetime import date
 
 #Tạo dữu liệu cho user
