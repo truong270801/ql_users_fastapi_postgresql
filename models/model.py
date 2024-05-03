@@ -6,7 +6,7 @@ from sqlalchemy import Column ,Integer, String, DATE
 class User(Base):
     __tablename__ = "users"
 
-    id = Column(Integer,primary_key=True, nullable=False)
+    id = Column(Integer,primary_key=True, nullable=False,auto_increment=True)
     firstName = Column(String)
     lastName = Column(String)
     maidenName = Column(String)
