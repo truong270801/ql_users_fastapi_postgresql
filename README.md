@@ -7,12 +7,22 @@
 
 
 ## Cài đặt :
+
+* `git clone https://github.com/truong270801/ql_users_fastapi_postgresql.git`
+
 ### Cơ sở dữ liệu:
 * Tạo cơ sở dữ liệu mới tên là `Users`
-* Sửa đổi tên và mật khẩu trong database.py `postgresql://postgres:123456@localhost:5432/Users`
+* Sửa đổi tên, mật khẩu, tên database, tên host trong file .env
+```
+DB_USER="postgres"
+DB_PASS="123456"
+DB_HOST="localhost:5432"
+DB_NAME="Users"
+```
 ### Mở lệnh Terminal VSCode:
-* `git clone https://github.com/truong270801/ql_users_fastapi_postgresql.git`
 * `cd ql_users_fastapi_postgresql`
+* `alembic upgrade head --sql`
+* `alembic upgrade head`
 * `uvicorn main:app --reload`
 ### Mở trình duyệt :
 * URL mặc định: `http://127.0.0.1:8000/`
