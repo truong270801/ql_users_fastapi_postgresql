@@ -1,7 +1,10 @@
-from database.database import Base
 from sqlalchemy import Column ,Integer, String, DATE
 
+#from sqlalchemy.ext.declarative import declarative_base 
+from database.database import Base
+from sqlalchemy.orm import Session
 
+#Base = declarative_base()
 
 class User(Base):
     __tablename__ = "users"
@@ -18,6 +21,14 @@ class User(Base):
     address = Column(String)
     city = Column(String)
     university = Column(String)
-    user_name = Column(String, nullable=False)
+    username = Column(String, nullable=False)
     password = Column(String, nullable=False)   
-  
+
+    def check_password(self, password: str) -> bool:
+        return password == self.password
+    
+    def authenticate_user(db: Session, username: str, password: str):
+        user = db.query(User).filter(User.username == username).first()
+        if not user or not user.check_password(password):
+            return None 
+        return user 

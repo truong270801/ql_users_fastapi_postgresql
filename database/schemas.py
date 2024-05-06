@@ -17,7 +17,7 @@ class userSchema(BaseModel):
     address:Optional[str] = None
     city:Optional[str] = None
     university:Optional[str] = None
-    user_name: str 
+    username: str 
     password: str  
 
     class Config:
