@@ -1,5 +1,8 @@
 from sqlalchemy.orm import Session
 from models.model import User
+from typing import Optional
+
+
 
 
 class UserRepository:
@@ -35,3 +38,4 @@ class UserRepository:
             self.db.commit()
             return True
         return False
+

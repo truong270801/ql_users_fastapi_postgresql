@@ -3,6 +3,9 @@ from fastapi import FastAPI
 from controllers.routers import router 
 
 app = FastAPI()
+@app.get('/')
+async def Home():
+    return "Welcome Home"
 
 
 app.include_router(router, prefix="/users", tags=["Users"])  

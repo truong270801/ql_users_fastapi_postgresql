@@ -17,9 +17,11 @@ class userSchema(BaseModel):
     address:Optional[str] = None
     city:Optional[str] = None
     university:Optional[str] = None
+    user_name: str 
+    password: str  
 
     class Config:
-        orm_mode = True
+        orm_mode = True 
 
 class RequestUser(BaseModel):
     parameter: userSchema = Field(...)
