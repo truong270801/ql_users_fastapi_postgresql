@@ -5,7 +5,7 @@
 * Thêm, đọc, sửa, xóa API
 * Quản lý version database (alembic)
 * Xác thực bằng mã token (jwt)
-* Phân quyền người dùng 
+* Phân quyền người dùng (Admin:toàn quyền, user: đọc, sửa)
 
 ## Yêu cầu :
 * Cài đặt [Python](https://www.python.org/downloads/)
