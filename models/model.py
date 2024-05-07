@@ -23,6 +23,8 @@ class User(Base):
     university = Column(String)
     username = Column(String, nullable=False)
     password = Column(String, nullable=False)   
+    role = Column(String)
+
 
     def check_password(self, password: str) -> bool:
         return password == self.password
@@ -30,5 +32,5 @@ class User(Base):
     def authenticate_user(db: Session, username: str, password: str):
         user = db.query(User).filter(User.username == username).first()
         if not user or not user.check_password(password):
-            return None 
+            return None
         return user 

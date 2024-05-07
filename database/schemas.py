@@ -19,6 +19,7 @@ class userSchema(BaseModel):
     university:Optional[str] = None
     username: str 
     password: str  
+    role: str
 
     class Config:
         orm_mode = True 

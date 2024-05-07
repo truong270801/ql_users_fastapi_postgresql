@@ -16,14 +16,15 @@ app = FastAPI()
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
+#Đăng nhập lấy mã token
 @app.post("/token")
 async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
     user = User.authenticate_user(db, form_data.username, form_data.password)
     if not user:
-        raise HTTPException(status_code=401, detail="Incorrect username or password")
+        raise HTTPException(status_code=401, detail="Sai tài khoản hoặc mật khẩu")
     
     access_token_expires = timedelta(minutes=TIME)
-    access_token = create_jwt_token(data={"sub": user.username}, expires_delta=access_token_expires)
+    access_token = create_jwt_token(data={"sub": user.username,"role": user.role}, expires_delta=access_token_expires)
     return {"access_token": access_token, "token_type": "bearer"}
 
 @app.get('/')
