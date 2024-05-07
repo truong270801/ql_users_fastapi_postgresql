@@ -1,5 +1,12 @@
 ﻿# Sử dụng FastAPI và PostgreSQL tạo API quản lý dữ liệu người dùng 
 
+## Chức năng :
+* Tạo API 
+* Thêm, đọc, sửa, xóa API
+* Quản lý version database (alembic)
+* Xác thực bằng mã token (jwt)
+* Phân quyền người dùng 
+
 ## Yêu cầu :
 * Cài đặt [Python](https://www.python.org/downloads/)
 * Cài đặt [PostgreSQL](https://www.postgresql.org/download/)
