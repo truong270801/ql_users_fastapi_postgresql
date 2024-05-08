@@ -1,10 +1,16 @@
 ﻿# Sử dụng FastAPI và PostgreSQL tạo API quản lý dữ liệu người dùng 
 
+## Chức năng :
+* Tạo API 
+* Thêm, đọc, sửa, xóa API
+* Quản lý version database (alembic)
+* Xác thực bằng mã token (jwt)
+* Phân quyền người dùng (Admin:toàn quyền, user: đọc, sửa)
+
 ## Yêu cầu :
 * Cài đặt [Python](https://www.python.org/downloads/)
 * Cài đặt [PostgreSQL](https://www.postgresql.org/download/)
 * Tùy nhu cầu dùng [Postman](https://www.postman.com/downloads/)
-
 
 ## Cài đặt :
 
@@ -23,12 +29,15 @@ DB_NAME="Users"
 * `cd ql_users_fastapi_postgresql`
 * `pip install uvicorn`
 * `pip install fastapi`
+* `pip install python-dotenv`
 * `pip install sqlalchemy`
 * `pip install psycopg2`
+* `pip install alembic`
+* `alembic downgrade <target_version>`
 * `alembic upgrade head --sql`
 * `alembic upgrade head`
+* `pip install pyjwt`
 * `uvicorn main:app --reload`
-
 
 ### Mở trình duyệt :
 * URL mặc định: `http://127.0.0.1:8000/`
