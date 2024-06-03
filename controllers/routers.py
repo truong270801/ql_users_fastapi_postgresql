@@ -1,32 +1,64 @@
-from fastapi import APIRouter, Depends, HTTPException, Path
-from sqlalchemy.orm import Session
-from database.database import get_db
-from database.schemas import RequestUser, Response
-from controllers import crud
+from fastapi import APIRouter
+from ariadne.asgi import GraphQL
+from ariadne import QueryType, MutationType, make_executable_schema, load_schema_from_path
+from models.model import User
+from database.database import SessionLocal
+
+type_defs = load_schema_from_path("database/schema.graphql")
+
+# Định nghĩa truy vấn
+query = QueryType()
+
+@query.field("user")
+def resolve_user(_, info, id):
+    session = SessionLocal()
+    return session.query(User).filter(User.id == id).first()
+
+@query.field("allUsers")
+def resolve_all_users(_, info):
+    session = SessionLocal()
+    return session.query(User).all()
+
+# Định nghĩa thay đổi 
+mutation = MutationType()
+
+@mutation.field("createUser")
+def resolve_create_user(_, info, user_data):
+    session = SessionLocal()
+    user = User(**user_data)
+    session.add(user)
+    session.commit()
+    session.refresh(user)
+    return user
+
+@mutation.field("updateUser")
+def resolve_update_user(_, info, id, user_data):
+    session = SessionLocal()
+    user = session.query(User).filter(User.id == id).first()
+    if user:
+        for key, value in user_data.items():
+            setattr(user, key, value)
+        session.commit()
+        session.refresh(user) 
+        return user
+    return  {"success": False, "message": "Người dùng không tồn tại !"}
+
+
+@mutation.field("deleteUser")
+def resolve_delete_user(_, info, id):
+    session = SessionLocal()
+    user = session.query(User).filter(User.id == id).first()
+    if user:
+        session.delete(user)
+        session.commit()
+        return {"success": True, "message": "Xóa người dùng thành công!"}
+    return {"success": False, "message": "Người dùng không tồn tại !"}
+
+# Tạo executable schema
+schema = make_executable_schema(type_defs, query, mutation)
 
 router = APIRouter()
 
-@router.post('/create')
-async def create_user(request: RequestUser, db: Session = Depends(get_db)):
-    created_user = crud.create_user(db, request)
-    return Response(user=created_user).dict(exclude_none=True)
-
-@router.get('/')
-async def get_users(db: Session = Depends(get_db)):
-    users = crud.get_users(db)
-    return Response(user=users).dict(exclude_none=True)
-
-@router.get('/{id}')
-async def get_user_by_id(id: int, db: Session = Depends(get_db)):
-    user = crud.get_user_by_id(db, id)
-    return Response(user=user).dict(exclude_none=True)
-
-@router.put('/{id}')
-async def update_user(request: RequestUser, id: int, db: Session = Depends(get_db)):
-    updated_user = crud.update_user(db, id, request)
-    return Response(user=updated_user).dict(exclude_none=True)
-
-@router.delete('/{id}')
-async def delete_user(id: int, db: Session = Depends(get_db)):
-    deleted = crud.delete_user(db, id)
-    return {"success": deleted}
+graphql_app = GraphQL(schema, debug=True)
+router.add_route("/graphql", graphql_app)
+router.add_websocket_route("/graphql", graphql_app)

@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+sqlalchemy
+psycopg2-binary
+graphene
+graphene-sqlalchemy
+ariadne 
+alembic upgrade head
+
