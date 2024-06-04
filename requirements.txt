@@ -3,7 +3,6 @@ uvicorn
 sqlalchemy
 psycopg2
 graphene
-graphene
-ariadne==0.13.0  
+ariadne 
 alembic 
 
