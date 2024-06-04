@@ -1,9 +1,9 @@
 fastapi
 uvicorn
 sqlalchemy
-psycopg2-binary
+psycopg2
 graphene
-graphene-sqlalchemy
-ariadne 
+graphene
+ariadne==0.13.0  
 alembic 
 
