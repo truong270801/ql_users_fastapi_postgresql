@@ -20,14 +20,10 @@ DB_HOST="localhost:5432"
 DB_NAME="Users"
 ```
 ### Mở lệnh Terminal VSCode:
-* `cd ql_users_fastapi_postgresql`
-* `pip install uvicorn`
-* `pip install fastapi`
-* `pip install sqlalchemy`
-* `pip install psycopg2`
-* `alembic upgrade head --sql`
-* `alembic upgrade head`
-* `uvicorn main:app --reload`
+* Trỏ đến thư mục chạy dự án: `cd ql_users_fastapi_postgresql`
+* Cài đặt các thư viện :` pip install -r requirements.txt`
+* Chạy version database: `alembic upgrade head`
+* Chạy dự án : `uvicorn main:app --reload`
 
 
 ### Mở trình duyệt :
