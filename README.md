@@ -1,4 +1,4 @@
-﻿# Sử dụng FastAPI và PostgreSQL tạo API quản lý dữ liệu người dùng 
+﻿# Sử dụng FastAPI, PostgreSQL và GraphQL tạo API quản lý dữ liệu người dùng  
 
 ## Yêu cầu :
 * Cài đặt [Python](https://www.python.org/downloads/)
@@ -20,18 +20,114 @@ DB_HOST="localhost:5432"
 DB_NAME="Users"
 ```
 ### Mở lệnh Terminal VSCode:
-* `cd ql_users_fastapi_postgresql`
-* `pip install uvicorn`
-* `pip install fastapi`
-* `pip install sqlalchemy`
-* `pip install psycopg2`
-* `alembic upgrade head --sql`
-* `alembic upgrade head`
-* `uvicorn main:app --reload`
+* Trỏ đến thư mục chạy dự án: `cd ql_users_fastapi_postgresql`
+* Cài đặt các thư viện :` pip install -r requirements.txt`
+* Chạy version database: `alembic upgrade head`
+* Chạy dự án : `uvicorn main:app --reload`
 
 
 ### Mở trình duyệt :
 * URL mặc định: `http://127.0.0.1:8000/`
 * URL mở Swagger UI: `http://127.0.0.1:8000/docs/`
-* URL lấy dữ liệu tất cả user: `http://127.0.0.1:8000/users/`
-* URL lấy dữ liệu user từ id:`http://127.0.0.1:8000/users/{id}`
+* URL mở Ariande GraphQL: `http://127.0.0.1:8000/graphql`
+
+Câu lệnh truy vấn :
+- Lệnh tạo thêm người dùng 
+
+```
+    mutation{
+    createUser(user_data:{
+        firstName: "tran",
+        lastName: "truong",
+        maidenName: "van",
+        gender: "nam",
+        birthDate: "2001-08-27",
+        age:23 ,
+        email: "truong@gmail.com",
+        city: "nam dinh",
+        phone: "0123456789",
+        address: "nam dinh",
+        university: "HAU"
+    }){
+        id
+        firstName
+        lastName
+        email
+        birthDate
+        city
+        gender
+        phone
+        address
+        university
+    }
+    }
+
+```
+- Lệnh lấy tất cả người dùng :
+    ```
+    query{
+    allUsers{
+            id
+            firstName
+            lastName
+            email
+            birthDate
+            city
+            gender
+            phone
+            address
+            university
+    }
+    }
+    ```
+- Lệnh lấy thông tin 1 người dùng duy nhất:
+    ```
+        query{
+        user(id:1){
+            firstName
+            lastName
+            birthDate
+            age
+            address
+            gender
+            university
+        }
+        }
+    ```
+- Lệnh sửa thông tin người dùng:
+    ```
+    mutation{
+    updateUser(id:5,user_data:{
+                firstName: "nguyen",
+                lastName: "nam",
+                maidenName: "hoang",
+                gender: "nam",
+                birthDate: "1999-03-16",
+                age:25 ,
+                email: "hoangnam@gmail.com",
+                city: "ha noi",
+                phone: "0123456789",
+                address: "ha noi",
+                university: "HAU"
+            }){
+                id
+                firstName
+                lastName
+                email
+                birthDate
+                city
+                gender
+                phone
+                address
+                university
+    }
+    }
+```
+-lệnh xóa dữ liệu người dùng :
+    ```
+    mutation{
+    deleteUser(id:1){
+                id
+     }
+    }
+```
