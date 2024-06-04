@@ -35,8 +35,9 @@ DB_NAME="Users"
 Câu lệnh truy vấn :
 - Lệnh tạo thêm người dùng 
 
-```
+
 # Tạo dữ liệu của người dùng mới và trả về giá trị yêu cầu.
+```
     mutation{
     createUser(user_data:{
         firstName: "tran",
@@ -65,8 +66,10 @@ Câu lệnh truy vấn :
     }
 
 ```
+
 - Lệnh lấy tất cả người dùng :
-    ```
+  
+```
 #Lấy tất cả dữ liệu tất cả người dùng theo giá trị yêu cầu.
     query{
     allUsers{
@@ -82,9 +85,9 @@ Câu lệnh truy vấn :
             university
     }
     }
-    ```
+```
 - Lệnh lấy thông tin 1 người dùng duy nhất:
-    ```
+```    
     #Lấy dữ liệu của 1 người dùng theo trường id và trả về giá trị yêu cầu.
         query{
         user(id:1){
@@ -97,10 +100,10 @@ Câu lệnh truy vấn :
             university
         }
         }
-    ```
+```
 - Lệnh sửa thông tin người dùng:
 
-    ```
+```
     # Sửa lại dữ liệu người dùng theo trường id và trả về kết quả theo yêu cầu.
     mutation{
     updateUser(id:5,user_data:{
@@ -128,9 +131,8 @@ Câu lệnh truy vấn :
                 university
     }
     }
-```
-```
 
+```
  - lệnh xóa dữ liệu người dùng :
 
 ```
