@@ -128,7 +128,7 @@ Câu lệnh truy vấn :
                 university
     }
     }
-
+```
 ```
 
  - lệnh xóa dữ liệu người dùng :
