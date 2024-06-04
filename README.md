@@ -21,6 +21,7 @@ DB_NAME="Users"
 ```
 ### Mở lệnh Terminal VSCode:
 * Trỏ đến thư mục chạy dự án: `cd ql_users_fastapi_postgresql`
+* Trỏ đến branch chạy : ` git checkout GraphQL`
 * Cài đặt các thư viện :` pip install -r requirements.txt`
 * Chạy version database: `alembic upgrade head`
 * Chạy dự án : `uvicorn main:app --reload`
@@ -35,6 +36,7 @@ Câu lệnh truy vấn :
 - Lệnh tạo thêm người dùng 
 
 ```
+# Tạo dữ liệu của người dùng mới và trả về giá trị yêu cầu.
     mutation{
     createUser(user_data:{
         firstName: "tran",
@@ -65,6 +67,7 @@ Câu lệnh truy vấn :
 ```
 - Lệnh lấy tất cả người dùng :
     ```
+#Lấy tất cả dữ liệu tất cả người dùng theo giá trị yêu cầu.
     query{
     allUsers{
             id
@@ -82,6 +85,7 @@ Câu lệnh truy vấn :
     ```
 - Lệnh lấy thông tin 1 người dùng duy nhất:
     ```
+    #Lấy dữ liệu của 1 người dùng theo trường id và trả về giá trị yêu cầu.
         query{
         user(id:1){
             firstName
@@ -95,7 +99,9 @@ Câu lệnh truy vấn :
         }
     ```
 - Lệnh sửa thông tin người dùng:
+
     ```
+    # Sửa lại dữ liệu người dùng theo trường id và trả về kết quả theo yêu cầu.
     mutation{
     updateUser(id:5,user_data:{
                 firstName: "nguyen",
@@ -122,12 +128,17 @@ Câu lệnh truy vấn :
                 university
     }
     }
+
 ```
--lệnh xóa dữ liệu người dùng :
-    ```
+
+ - lệnh xóa dữ liệu người dùng :
+
+```
+#Xóa toàn bộ dữ liệu người dùng và trả thông tin người dùng bị xóa theo yêu cầu .
     mutation{
     deleteUser(id:1){
                 id
+                lastName
      }
     }
 ```
