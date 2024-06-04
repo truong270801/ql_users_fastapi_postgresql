@@ -41,7 +41,7 @@ def resolve_update_user(_, info, id, user_data):
         session.commit()
         session.refresh(user) 
         return user
-    return  {"success": False, "message": "Người dùng không tồn tại !"}
+    return None
 
 
 @mutation.field("deleteUser")
@@ -51,8 +51,8 @@ def resolve_delete_user(_, info, id):
     if user:
         session.delete(user)
         session.commit()
-        return {"success": True, "message": "Xóa người dùng thành công!"}
-    return {"success": False, "message": "Người dùng không tồn tại !"}
+        return user
+    return None
 
 # Tạo executable schema
 schema = make_executable_schema(type_defs, query, mutation)
